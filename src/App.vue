@@ -12,6 +12,26 @@
 
       div.navbar-custom-menu
         ul.nav.navbar-nav
+          // Messages
+          li.dropdown.messages-menu
+            a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
+              i.fa.fa-envelope-o
+              span.label.label-success 4
+            ul.dropdown-menu
+              li.header You have 4 messages
+              li
+                ul.menu
+                  li
+                    a()
+                      .pull-left
+                        img.profile-picture-sm.img-circle(alt="User Img" src="/images/profile_default.jpg")
+                      h4
+                        | Website Admin
+                        small
+                          i.fa.fa-clock-o 5 min
+                      p This is some test message data
+              li.footer
+                a(v-link="{path:'/messages' }") See All Messages
           // Settings
           li.dropdown.notifications-menu
             a.dropdown-toggle(href="" data-toggle="dropdown")
@@ -26,7 +46,6 @@
                     a(v-link="{path: '/admin', activeClass:'active'}")
                       i.fa.fa-wrench.info
                       |   Administration
-
 
           li.dropdown.user.user-menu(v-if="UserService.loggedIn")
             a.dropdown-toggle(href="#" data-toggle="dropdown")

@@ -239,6 +239,7 @@ function _init() {
    */
   $.AdminLTE.layout = {
     activate: function () {
+      console.log("i got to AdminLTE.layout.activate")
       var _this = this;
       _this.fix();
       _this.fixSidebar();

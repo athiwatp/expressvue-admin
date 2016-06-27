@@ -36,3 +36,7 @@
   min-height:400px;
   margin-left: 0px;
 }
+
+.content-wrapper{
+  overflow-y: scroll;
+}

@@ -1,0 +1,21 @@
+{
+  "smtp": {
+    "port": "465",
+    "host": "smtp.gmail.com",
+    "secure": true,
+    "ignoreTLS": false,
+    "requireTLS": false,
+    "tls": {
+      "rejectUnauthorized": false
+    },
+    "authMethod": "PLAIN",
+    "auth": {
+      "user": "bcrowe306@gmail.com",
+      "pass": "Mrcrowe86"
+    }
+  },
+  "mailData": {
+    "from": "bcrowe306@gmail.com",
+    "subject": "Test Mail"
+  }
+}

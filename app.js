@@ -109,8 +109,11 @@ var wpmw_config = {
     // options for formating the statistics
 }
 
-
+// Routes
 var routes = require('./routes/index');
+var config_routes = require("./routes/config");
+var services_routes = require("./routes/services");
+
 
 var app = express();
 
@@ -147,7 +150,9 @@ var autobackend = require("autobackend")({
 app.use('/', routes);
 app.use('/', autobackend.factory());
 app.use('/todos', autobackend.collection("todos"));
-app.use('/config', autobackend.collection("config"));
+app.use('/config', autobackend.middleware.verify, config_routes);
+app.use('/services', autobackend.middleware.verify, services_routes);
+app.use('/messages', autobackend.middleware.verify, autobackend.collection("messages"));
 
 
 

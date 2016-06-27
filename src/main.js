@@ -17,14 +17,26 @@ import Users_New from './Admin/Users/New.vue'
 import Users_Edit from './Admin/Users/Edit.vue'
 import Users_View from './Admin/Users/View.vue'
 import Email from './Admin/Email/Index.vue'
+import Messages from './Messages/Messages.vue'
+import Messages_Index from './Messages/Index.vue'
+import Messages_New from './Messages/New.vue'
+import Messages_View from './Messages/View.vue'
 
-Vue.filter("timeFull", (value) => {
-	return moment(value).format("M/D/YYYY, h:mm:ss a")
-})
-
+// Initialize Vue Plugins
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueValidator)
+
+
+// Filters
+Vue.filter("timeFull", (value) => {
+	return moment(value).format("M/D/YYYY, h:mm:ss a")
+})
+Vue.filter("timeFromNow", (value) => {
+	return moment(value).fromNow()
+})
+
+// Setup router and Auth Services
 var router = new VueRouter({
 	linkActiveClass:"active"
 });
@@ -44,7 +56,6 @@ Vue.http.interceptors.push({
 	}
 });
 router.beforeEach(Auth.routerInterceptor());
-
 
 router.map({
 	"/":{
@@ -94,6 +105,21 @@ router.map({
 			},
 			"/email":{
 				component:Email
+			}
+		}
+	},
+	"/messages":{
+		component:Messages,
+		authenticate:true,
+		subRoutes:{
+			"/":{
+				component:Messages_Index
+			},
+			"/new":{
+				component:Messages_New
+			},
+			"/view/:_id":{
+				component:Messages_View
 			}
 		}
 	}
