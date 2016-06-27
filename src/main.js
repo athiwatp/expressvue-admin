@@ -16,6 +16,7 @@ import Users from './Admin/Users/Index.vue'
 import Users_New from './Admin/Users/New.vue'
 import Users_Edit from './Admin/Users/Edit.vue'
 import Users_View from './Admin/Users/View.vue'
+import Email from './Admin/Email/Index.vue'
 
 Vue.filter("timeFull", (value) => {
 	return moment(value).format("M/D/YYYY, h:mm:ss a")
@@ -91,6 +92,9 @@ router.map({
 			"/users/view/:_id":{
 				component:Users_View
 			},
+			"/email":{
+				component:Email
+			}
 		}
 	}
 });

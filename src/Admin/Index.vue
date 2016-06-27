@@ -32,9 +32,9 @@ aside.main-sidebar
           i.fa.fa-wrench
           span Configuration
       li(v-link-active)
-        a(href="")
+        a(v-link="{path: '/admin/email', activeClass:'active'}")
           i.fa.fa-link
-          span Link 1
+          span Email
 .content-wrapper
   router-view()
 footer.main-footer

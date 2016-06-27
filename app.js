@@ -147,6 +147,7 @@ var autobackend = require("autobackend")({
 app.use('/', routes);
 app.use('/', autobackend.factory());
 app.use('/todos', autobackend.collection("todos"));
+app.use('/config', autobackend.collection("config"));
 
 
 
