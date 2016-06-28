@@ -40,3 +40,7 @@
 .content-wrapper{
   overflow-y: scroll;
 }
+
+.boldtext{
+  font-weight: bold;
+}

@@ -5,8 +5,6 @@
       // Sidebar toggle
       a.sidebar-toggle(data-toggle="offcanvas" role="button")
       ul.nav.navbar-nav
-        li(v-link-active v-if="UserService.loggedIn")
-          a(v-link="{path: '/test', activeClass:'active'}") Test
         li(v-link-active)
           a(v-link="{path: '/about', activeClass:'active'}") About
 
@@ -14,22 +12,23 @@
         ul.nav.navbar-nav
           // Messages
           li.dropdown.messages-menu
-            a.dropdown-toggle(data-toggle="dropdown" aria-expanded="false")
+            a.dropdown-toggle(href="" data-toggle="dropdown" aria-expanded="false")
               i.fa.fa-envelope-o
-              span.label.label-success 4
+              span.label.label-success(v-if="unreadMessages != 0") {{ unreadMessages }}
             ul.dropdown-menu
-              li.header You have 4 messages
+              li.header {{ unreadMessages }} unread messages
               li
                 ul.menu
-                  li
-                    a()
+                  li(v-for="message in firstFourMessages")
+                    a(v-link="{path: '/messages/view/' + message._id}")
                       .pull-left
-                        img.profile-picture-sm.img-circle(alt="User Img" src="/images/profile_default.jpg")
-                      h4
-                        | Website Admin
+                        img.img-circle.profile-picture-sm(v-if="!message.from.profile_picture" v-bind:src="'images/profile_default.jpg'" alt="User Image")
+                        img.img-circle.profile-picture-sm(v-if="message.from.profile_picture" v-bind:src="'images/' + message.from.profile_picture" alt="User Image")
+                      h4(v-bind:class="{'text-blue': !message.read}")
+                        | {{message.from.fname + " " + message.from.lname | truncate}}
                         small
-                          i.fa.fa-clock-o 5 min
-                      p This is some test message data
+                          i.fa.fa-clock-o(v-bind:class="{'text-blue': !message.read}") {{message.created | timeFromNow}}
+                      p {{message.content | truncate}}
               li.footer
                 a(v-link="{path:'/messages' }") See All Messages
           // Settings
@@ -74,6 +73,7 @@
 <script>
 import UserService from "./UserService.vue"
 import AuthService from "./AuthService.vue"
+import MessageService from "./MessageService.vue"
 export default {
 
   data () {
@@ -82,11 +82,21 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      title: 'Hello Vue!',
+      title: 'Express-Vue Admin',
       UserService:UserService,
+      MessageService:MessageService
+    }
+  },
+  computed:{
+    unreadMessages(){
+      return (_.filter(MessageService.messages, {read:false})).length
+    },
+    firstFourMessages(){
+      return _.take(_.orderBy(MessageService.messages,"created","desc"),4)
     }
   },
   ready(){
+
   },
   methods:{
     logout:function(){

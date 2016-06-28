@@ -2,7 +2,12 @@
 
 export default {
   loggedIn:false,
-  user:{}
+  user:{},
+  ready(){
+    this.$watch("loggedIn", value => {
+      console.log(value)
+    })
+  }
 }
 
 </script>

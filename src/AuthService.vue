@@ -3,6 +3,7 @@
   import VueRouter from "vue-router"
   import VueResource from "vue-resource"
   import UserService from "./UserService.vue"
+  import MessageService from "./MessageService.vue"
   // import TokenService from "./TokenService.vue"
   var TokenService = {
     set(token){
@@ -25,14 +26,19 @@
     constructor(){
 
     }
-    //
+    // Functions
+    setUserServiceLoggedIn(user,token){
+      UserService.loggedIn = true;
+      UserService.user = user;
+      TokenService.set(token);
+      // Load in messages
+      MessageService.init(user._id)
+    }
     login(user, cb){
       Vue.http.post("/auth/login", user).then((results) => {
         if(results.data && results.data.status){
           // Set user to logged in
-          UserService.loggedIn = true;
-          UserService.user = results.data.user;
-          TokenService.set(results.data.access_token);
+          this.setUserServiceLoggedIn(results.data.user,results.data.access_token);
           router.go("/");
         }
         cb(results.data)
@@ -61,10 +67,10 @@
     getUser(cb){ // Sets UserService.user and .loggedIn token exists and is valid
       var token = TokenService.get()
       if(token && token != "undefined"){
-        this.validate().then((results) => {
+        this.validate(token).then((results) => {
           if(results.data && results.data.status){
-            UserService.loggedIn = true;
-            UserService.user = results.data.user;
+            this.setUserServiceLoggedIn(results.data.user,token);
+
             if(typeof cb == "function"){
               return cb(true);
             }
@@ -83,10 +89,19 @@
       var token = TokenService.get()
       if(token && token != "undefined"){
         if(!UserService.loggedIn){
-          this.getUser();
-        }
-        if(typeof cb == "function"){
-          return cb(true);
+          this.getUser(status => {
+            if(typeof cb == "function"){
+              if(status){
+
+              }
+              return cb(status);
+            }
+          });
+        }else{
+          if(typeof cb == "function"){
+
+            return cb(true);
+          }
         }
       }else{
         if(typeof cb == "function"){

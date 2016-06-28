@@ -1,6 +1,5 @@
 <template lang="jade">
 .content-header
-
   p.pull-right(style="font-size:12px; color:#888888")
     i.fa.fa-clock-o   {{message.created | timeFromNow}}
   p.pull-right(style="margin-right:15px;" v-on:click.prevent="deleteMessage")
@@ -41,9 +40,9 @@ import UserService from "../UserService.vue"
       data(){
         messageApi.get({_id: this.$route.params._id}).then(response => {
           this.message = response.data;
+          this.message.read = true;
+          this.$http.put("/messages/" +this.message._id, this.message).then();
         })
-        this.message.read = true;
-        //messageApi.save({_id:this.message._id}, this.message).then();
       }
     },
 		data(){
@@ -51,10 +50,11 @@ import UserService from "../UserService.vue"
 				UserService,
 				title:"Message Header",
         message:{},
-        replyMessage:{}
+        replyMessage:{},
 			}
 		},
     ready(){
+      console.log(this.$route.matched)
       // messageApi.get({_id: this.$route.params._id}).then(response => {
       //   this.message = response.data;
       // })

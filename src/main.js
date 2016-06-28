@@ -33,8 +33,20 @@ Vue.filter("timeFull", (value) => {
 	return moment(value).format("M/D/YYYY, h:mm:ss a")
 })
 Vue.filter("timeFromNow", (value) => {
-	return moment(value).fromNow()
+	return moment(value).fromNow(true)
 })
+Vue.filter("isRead", value =>{
+	return true
+})
+Vue.filter("truncate", (value) => {
+	return _.truncate(value,{length:30})
+})
+
+// Setup Transitions
+Vue.transition('fade', {
+  leaveClass: 'fadeOut'
+})
+
 
 // Setup router and Auth Services
 var router = new VueRouter({
@@ -113,12 +125,15 @@ router.map({
 		authenticate:true,
 		subRoutes:{
 			"/":{
-				component:Messages_Index
+				component:Messages_Index,
+				authenticate:true,
 			},
 			"/new":{
+				authenticate:true,
 				component:Messages_New
 			},
 			"/view/:_id":{
+				authenticate:true,
 				component:Messages_View
 			}
 		}
