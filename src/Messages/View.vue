@@ -10,7 +10,8 @@
     img.img-circle.profile-picture(v-if="!message.from.profile_picture" v-bind:src="'images/profile_default.jpg'" alt="User Image")
     img.img-circle.profile-picture(v-if="message.from.profile_picture" v-bind:src="'images/' + message.from.profile_picture" alt="User Image")
   h4
-    | {{message.from.fname}} {{message.from.lname}}
+    | From:
+    b   {{message.from.fname}} {{message.from.lname}}
     small  {{message.from.email}}
 .content
   .box

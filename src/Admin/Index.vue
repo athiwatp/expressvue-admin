@@ -24,11 +24,7 @@ aside.main-sidebar
           i.fa.fa-user
           span Users
       li(v-link-active)
-        a(href="")
-          i.fa.fa-users
-          span Roles
-      li(v-link-active)
-        a(href="")
+        a(v-link="{path:'/admin/configuration'}")
           i.fa.fa-wrench
           span Configuration
       li(v-link-active)

@@ -29,11 +29,13 @@
                 label Email
                 input.form-control(type="text" id="fname" placeholder="Email" v-validate:email="['required']" v-model="user.email")
                 span.text-danger(v-if="$uservalidation.email.invalid && $uservalidation.email.touched") Email Required
-                
+
               // Role
               .form-group
                 label Role
-                input.form-control(type="text" id="fname" placeholder="First Name" v-model="user.role")
+                select.form-control(type="text" id="fname" placeholder="First Name" v-model="user.role")
+                  option(value="user") user
+                  option(value="admin") admin
 
               // Password
               .form-group(v-bind:class="{'has-error': $uservalidation.passwordGroup.invalid && $uservalidation.passwordGroup.touched}")

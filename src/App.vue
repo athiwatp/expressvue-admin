@@ -11,7 +11,7 @@
       div.navbar-custom-menu
         ul.nav.navbar-nav
           // Messages
-          li.dropdown.messages-menu
+          li.dropdown.messages-menu(v-if="UserService.loggedIn")
             a.dropdown-toggle(href="" data-toggle="dropdown" aria-expanded="false")
               i.fa.fa-envelope-o
               span.label.label-success(v-if="unreadMessages != 0") {{ unreadMessages }}
@@ -32,7 +32,7 @@
               li.footer
                 a(v-link="{path:'/messages' }") See All Messages
           // Settings
-          li.dropdown.notifications-menu
+          li.dropdown.notifications-menu(v-if="UserService.loggedIn")
             a.dropdown-toggle(href="" data-toggle="dropdown")
               i.fa.fa-cog
               |    Settings

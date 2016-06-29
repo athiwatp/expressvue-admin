@@ -12,6 +12,7 @@ import About from './About.vue'
 import Profile from './Profile.vue'
 import Login from './Login.vue'
 import Admin from './Admin/Index.vue'
+import Configuration from './Admin/Configuration/Index.vue'
 import Users from './Admin/Users/Index.vue'
 import Users_New from './Admin/Users/New.vue'
 import Users_Edit from './Admin/Users/Edit.vue'
@@ -27,6 +28,13 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(VueValidator)
 
+Vue.mixin({
+	data(){
+		return {
+			test:"testdata"
+		}
+	}
+})
 
 // Filters
 Vue.filter("timeFull", (value) => {
@@ -43,9 +51,7 @@ Vue.filter("truncate", (value) => {
 })
 
 // Setup Transitions
-Vue.transition('fade', {
-  leaveClass: 'fadeOut'
-})
+
 
 
 // Setup router and Auth Services
@@ -117,6 +123,9 @@ router.map({
 			},
 			"/email":{
 				component:Email
+			},
+			"/configuration":{
+				component:Configuration
 			}
 		}
 	},

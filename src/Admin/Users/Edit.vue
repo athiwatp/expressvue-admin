@@ -23,8 +23,9 @@
               label Email
               input.form-control(type="text" id="fname" placeholder="Email" v-model="user.email")
             .form-group
-              label Role
-              input.form-control(type="text" id="fname" placeholder="First Name" v-model="user.role")
+              select.form-control(type="text" id="fname" placeholder="Role" v-model="user.role")
+                option(value="user") user
+                option(value="admin") admin
             a.btn.btn-flat.btn-default.margin(v-link="{path :'/admin/users'}")
               i.fa.fa-times
               span  Cancel

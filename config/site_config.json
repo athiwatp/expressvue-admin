@@ -17,5 +17,8 @@
   "mailData": {
     "from": "bcrowe306@gmail.com",
     "subject": "Test Mail"
+  },
+  "server": {
+    "port": "3000"
   }
 }

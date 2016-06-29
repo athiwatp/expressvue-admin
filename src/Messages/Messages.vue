@@ -19,12 +19,15 @@ aside.main-sidebar
     // Sidebar Menu
     ul.sidebar-menu
       li.header
-        | {{MessageService.messages.length}} Messages
+        span(v-if="MessageService.messages.length != 0") {{MessageService.messages.length}}
+        span(v-if="MessageService.messages.length == 0") No
+        |   Message
+        span(v-if="MessageService.messages.length > 1 || MessageService.messages.length == 0") s
         span.text-blue(v-if="unreadMessages != 0")       ,{{unreadMessages}} Unread
         span.pull-right
           a.text-green(v-link="{path: '/messages/new'}")
             i.fa.fa-plus
-      li.animated(transition="fade" v-for="message in MessageService.messages | orderBy 'created' -1" v-link-active)
+      li( v-for="message in MessageService.messages | orderBy 'created' -1" v-link-active)
         a(v-link="{path: '/messages/view/' + message._id, activeClass:'active'}")
           .pull-left
             img.img-circle.profile-picture-sm(v-if="!message.from.profile_picture" v-bind:src="'images/profile_default.jpg'" alt="User Image")
