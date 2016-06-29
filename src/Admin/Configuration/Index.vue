@@ -1,3 +1,4 @@
+<!-- Configuration Index -->
 <template>
   <div class="content-header">
 		<h3> {{title}} </h3>

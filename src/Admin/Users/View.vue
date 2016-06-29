@@ -8,6 +8,9 @@
   a.text-warning(v-link="{path:'/admin/users/edit/' + user._id}")
     i.fa.fa-edit.margin
     span Edit
+  a.text-success(v-link="{path:'/admin/users/password/' + user._id}")
+    i.fa.fa-lock.margin
+    span Change Password
   a.text-danger(href="" v-on:click.prevent="delete(user)")
     i.fa.fa-trash.margin
     span  Delete

@@ -3,13 +3,13 @@
     a(v-link="{path: '/', exact:true}").logo {{title}}
     nav(role="navigation").navbar.navbar-static-top
       // Sidebar toggle
-      a.sidebar-toggle(data-toggle="offcanvas" role="button")
-      ul.nav.navbar-nav
-        li(v-link-active)
-          a(v-link="{path: '/about', activeClass:'active'}") About
+      a.sidebar-toggle(href="" data-toggle="offcanvas" role="button")
 
       div.navbar-custom-menu
         ul.nav.navbar-nav
+          li(v-link-active)
+            a(v-link="{path: '/about', activeClass:'active'}")
+              i.fa.fa-info
           // Messages
           li.dropdown.messages-menu(v-if="UserService.loggedIn")
             a.dropdown-toggle(href="" data-toggle="dropdown" aria-expanded="false")
@@ -34,8 +34,7 @@
           // Settings
           li.dropdown.notifications-menu(v-if="UserService.loggedIn")
             a.dropdown-toggle(href="" data-toggle="dropdown")
-              i.fa.fa-cog
-              |    Settings
+              i.fa.fa-gears
             ul.dropdown-menu
               li.header
                 | Site Settings

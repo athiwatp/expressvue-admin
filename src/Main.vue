@@ -5,7 +5,8 @@
 			// User panel
 			.user-panel
 				.pull-left.image
-					img.img-circle(v-if="UserService.user.profile_picture" v-bind:src="'images/' + UserService.user.profile_picture" alt="User Image")
+					img.img-circle.profile-picture(v-if="!UserService.user.profile_picture" v-bind:src="'images/profile_default.jpg'" alt="User Image")
+					img.img-circle.profile-picture(v-if="UserService.user.profile_picture" v-bind:src="'images/' + UserService.user.profile_picture" alt="User Image")
 				.pull-left.info
 					p  {{UserService.user.fname}} {{UserService.user.lname}}
 

@@ -39,6 +39,7 @@
 
 .content-wrapper{
   overflow-y: scroll;
+  min-height:400px
 }
 
 .boldtext{

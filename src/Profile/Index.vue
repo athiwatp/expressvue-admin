@@ -7,6 +7,12 @@
         .col-xs-12
           .box
             .box-header
+              a.text-warning(v-link="{path:'/profile/edit/' + UserService.user._id}")
+                i.fa.fa-edit.margin
+                span Edit
+              a.text-success(v-link="{path:'/profile/password/' + UserService.user._id}")
+                i.fa.fa-lock.margin
+                span Change Password
             .box-body
               h3
                 | {{UserService.user.fname + ' ' + UserService.user.lname}}
@@ -21,6 +27,9 @@
                 tr
                   td: strong Last Name:
                   td {{UserService.user.lname}}
+                tr
+                  td: strong Username:
+                  td {{UserService.user.username}}
                 tr
                   td: strong Email:
                   td {{UserService.user.email}}
@@ -50,7 +59,7 @@
 
 <script>
 
-  import UserService from "./UserService.vue"
+  import UserService from "../UserService.vue"
   export default {
     data(){
       return {

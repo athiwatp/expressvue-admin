@@ -6,6 +6,7 @@
       b Express-VueJS
       | Admin
   .login-box-body
+    a.pull-right(v-link="{path:'/register'}") Sign Up
     p Sign in to start you session
     form(v-on:submit.prevent="login(user)")
       .form-group.has-feedback

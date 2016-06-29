@@ -9,14 +9,18 @@ import Main from './Main.vue'
 import Todos from './Todos.vue'
 import Test from './Test.vue'
 import About from './About.vue'
-import Profile from './Profile.vue'
+import Profile from './Profile/Index.vue'
+import Profile_Edit from './Profile/Edit.vue'
+import Profile_Password from './Profile/Password.vue'
 import Login from './Login.vue'
+import Register from './Register.vue'
 import Admin from './Admin/Index.vue'
 import Configuration from './Admin/Configuration/Index.vue'
 import Users from './Admin/Users/Index.vue'
 import Users_New from './Admin/Users/New.vue'
 import Users_Edit from './Admin/Users/Edit.vue'
 import Users_View from './Admin/Users/View.vue'
+import Users_Password from './Admin/Users/Password.vue'
 import Email from './Admin/Email/Index.vue'
 import Messages from './Messages/Messages.vue'
 import Messages_Index from './Messages/Index.vue'
@@ -96,11 +100,19 @@ router.map({
 		component:Profile,
 		authenticate:true
 	},
+	"/profile/edit/:_id":{
+		component:Profile_Edit,
+		authenticate:true
+	},
+	"/profile/password/:_id":{
+		component:Profile_Password,
+		authenticate:true
+	},
 	"/login":{
 		component:Login
 	},
 	"/register":{
-		component:Users
+		component:Register
 	},
 	"/unauthorized":{
 		component:Users
@@ -120,6 +132,9 @@ router.map({
 			},
 			"/users/view/:_id":{
 				component:Users_View
+			},
+			"/users/password/:_id":{
+				component:Users_Password
 			},
 			"/email":{
 				component:Email

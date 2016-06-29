@@ -1,7 +1,5 @@
 <template lang="jade">
 .content-header
-  p.pull-right(style="font-size:12px; color:#888888")
-    i.fa.fa-clock-o   timeago
   .pull-left.image
     img.img-circle.profile-picture(v-if="!UserService.user.profile_picture" v-bind:src="'images/profile_default.jpg'" alt="User Image")
     img.img-circle.profile-picture(v-if="UserService.user.profile_picture" v-bind:src="'images/' + UserService.user.profile_picture" alt="User Image")
