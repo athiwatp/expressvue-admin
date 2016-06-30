@@ -58,8 +58,7 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-
-
+var jsonfile = require('jsonfile');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -96,7 +95,7 @@ var wpmw_config = {
     },
     // watch options (only lazy: false)
 
-    publicPath: "/",
+    publicPath: "/public/",
     // public path to bind the middleware to
     // use the same as in webpack
 
@@ -132,7 +131,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(webpack_middleware(compiler, wpmw_config));
 
-var port = normalizePort(process.env.PORT || '3000');
+var site_config = jsonfile.readFileSync("./config/site_config.json")
+var port = normalizePort(process.env.PORT || site_config.server.port || "3000");
 app.set('port', port);
 
 
@@ -144,9 +144,9 @@ var io = io(server)
 
 
 // Setup Routes
-var autobackend = require("autobackend")({
-  io:io
-});
+var config = require('./config/app_config');
+config.io = io
+var autobackend = require("autobackend")(config);
 app.use('/', routes);
 app.use('/', autobackend.factory());
 app.use('/todos', autobackend.collection("todos"));
